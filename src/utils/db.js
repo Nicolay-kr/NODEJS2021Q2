@@ -29,7 +29,7 @@ const db = {
   for (let i = 0; i < 3; i += 1) {
     db.Users.push(new User());
   }
-  const board = new Board();
+  const board = new Board({ userId: db.Users[0].id });
   db.Boards.push(board);
   db.Tasks.push(
     new Task({ boardId: board.id }),
@@ -37,4 +37,33 @@ const db = {
   );
 })();
 const getAllEntities = (tableName) => db[tableName].filter((entity) => entity);
-module.exports = { getAllEntities };
+
+// const getEntity = (tableName, id) =>
+//   db[tableName].filter((entity) => {
+//     // console.log(entity.id)
+//     if (entity.id === id) {
+//       // console.log(entity)
+//       return entity;
+//     }
+//   });
+
+  const getEntity = (tableName, id) =>{
+    const entities = db[tableName].filter(entity=>entity).filter(entity=>entity.id===id)
+    return entities[0]
+  }
+
+
+
+const saveEntity = (tableName, entity) => {
+  db[tableName].push(entity);
+  return getEntity(tableName, entity.id);
+};
+const updateEntity = (tableName, id, entity) => {
+  const oldEntity = getEntity(tableName, id);
+  if (oldEntity) {
+    db[tableName][db[tableName].indexOf(oldEntity)] = { ...entity };
+  }
+  return getEntity(tableName, id);
+};
+
+module.exports = { getAllEntities, getEntity, saveEntity, updateEntity };
