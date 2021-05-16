@@ -47,12 +47,27 @@ const getAllEntities = (tableName) => db[tableName].filter((entity) => entity);
 //     }
 //   });
 
-  const getEntity = (tableName, id) =>{
-    const entities = db[tableName].filter(entity=>entity).filter(entity=>entity.id===id)
-    return entities[0]
+const getEntity = (tableName, id) => {
+  const entities = db[tableName]
+    .filter((entity) => entity)
+    .filter((entity) => entity.id === id);
+  return entities[0];
+};
+
+const removeEntity = (tableName, id) => {
+  const entity = getEntity(tableName, id);
+  if (entity) {
+    db[`fix${tableName}Structure`](entity);
+    const index = db[tableName].indexOf(entity);
+    db[tableName] = [
+      ...db[tableName].slice(0, index),
+      ...(db[tableName].length > index + 1
+        ? db[tableName].slice(index + 1)
+        : []),
+    ];
   }
-
-
+  return entity
+};
 
 const saveEntity = (tableName, entity) => {
   db[tableName].push(entity);
@@ -66,4 +81,4 @@ const updateEntity = (tableName, id, entity) => {
   return getEntity(tableName, id);
 };
 
-module.exports = { getAllEntities, getEntity, saveEntity, updateEntity };
+module.exports = { getAllEntities, getEntity, saveEntity, updateEntity,removeEntity };

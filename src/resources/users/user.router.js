@@ -10,7 +10,7 @@ router.route('/').get(async (req, res) => {
 
 router.route('/:id').get(async (req, res) => {
   const user = await usersService.get(req.params.id);
-  res.status(200).json(User.toResponse);
+  res.status(200).send(User.toResponse(user));
 });
 
 router.route('/:id').delete(async (req, res) => {
