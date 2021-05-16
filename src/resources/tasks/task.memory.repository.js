@@ -1,8 +1,13 @@
-const DB = require("../../utils/db")
+const DB = require('../../utils/db');
+const Task = require('./task.model');
 // const NOT_FOUND_ERROR = require("")
-const TABLE_NAME = "Tasks"
+const TABLE_NAME = 'Tasks';
 
-const getAll = async () => DB.getAllEntities(TABLE_NAME);
+const getAll = async () => (boardId) =>{
+    console.log(DB[TABLE_NAME ].filter((element) => element.boardId === boardId))
+    return DB[TABLE_NAME ].filter((element) => element.boardId === boardId);
+
+};
 // const get = async id => {
 //   const task = await DB.getEntity(TABLE_NAME,id);
 //   if(!task){

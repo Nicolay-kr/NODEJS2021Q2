@@ -2,15 +2,27 @@
 const { v4: uuidv4 } = require('uuid');
 
 class Board {
-  constructor({ id = uuidv4(), name = 'Board', userId } = {}) {
+  constructor({
+    id = uuidv4(),
+    title = 'string',
+    columns = {
+      id: 'string',
+      title: 'string',
+      order: 0,
+    },
+  } = {}) {
     this.id = id;
-    this.name = name;
-    this.userId = userId;
+    this.title = title;
+    this.columns = columns
   }
 
   static toResponse(board) {
-    const { id, name, userId } = board;
-    return { id, name, userId };
+    const { id, title, columns } = board;
+    return { id, title, columns};
+  }
+
+  static fromRequest(body) {
+    return new Board(body);
   }
 }
 

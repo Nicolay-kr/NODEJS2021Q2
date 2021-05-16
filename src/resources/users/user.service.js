@@ -4,6 +4,6 @@ const getAll = () => usersRepo.getAll();
 const get = (user) => usersRepo.get(user);
 const remove = (user) => usersRepo.remove(user);
 const save = (user) => usersRepo.save(user);
-const update = (user) => usersRepo.update(user);
+const update = (id, user) => usersRepo.update(id, user);
 
-module.exports = { getAll, get, remove, save,update };
+module.exports = { getAll, get, remove, save, update };

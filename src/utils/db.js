@@ -75,8 +75,12 @@ const saveEntity = (tableName, entity) => {
 };
 const updateEntity = (tableName, id, entity) => {
   const oldEntity = getEntity(tableName, id);
+  console.log("id",id)
+  console.log("new",entity)
+  console.log("old",oldEntity)
   if (oldEntity) {
-    db[tableName][db[tableName].indexOf(oldEntity)] = { ...entity };
+    db[tableName][db[tableName].indexOf(oldEntity)] = { id,...entity };
+    // console.log(entity)
   }
   return getEntity(tableName, id);
 };
