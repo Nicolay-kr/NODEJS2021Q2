@@ -1,14 +1,15 @@
-const DB = require("../../utils/db")
-// const NOT_FOUND_ERROR = require("")
-const TABLE_NAME = "Boards"
+const DB = require('../../utils/db');
+
+const TABLE_NAME = 'Boards';
 
 const getAll = async () => DB.getAllEntities(TABLE_NAME);
-// const get = async id => {
-//   const board = await DB.getEntity(TABLE_NAME,id);
-//   if(!board){
-//     // throw new NOT_FOUND_ERROR = (`Couldn't find a user with id: ${id}`)
-//   }
-//   return board
-// };
 
-module.exports = { getAll };
+const get = async (id) => DB.getBoardById(id);
+
+const remove = async (id) => DB.removeBoard(id);
+
+const save = async (board) => DB.saveBoard(board);
+
+const update = async (id, board) => DB.updateBoard(id, board);
+
+module.exports = { getAll, get, remove, save, update };

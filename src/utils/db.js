@@ -6,21 +6,6 @@ const db = {
   Users: [],
   Boards: [],
   Tasks: [],
-  fixUsersStructure: (user) => {
-    if (user) {
-      db.Tasks.filter((task) => task).forEach((task) => {
-        task.userId = task.userId === user.id ? null : task.userId;
-      });
-    }
-  },
-  fixBoardsStructure: (board) => {
-    if (board) {
-      db.Tasks.filter((task) => task && task.board.id).forEach(
-        (task) => (db.Tasks[db.Tasks.indexOf(task)] = undefined)
-      );
-    }
-  },
-  fixTasksStructure: () => {},
 };
 
 // init DB
@@ -29,60 +14,121 @@ const db = {
   for (let i = 0; i < 3; i += 1) {
     db.Users.push(new User());
   }
-  const board = new Board({ userId: db.Users[0].id });
-  db.Boards.push(board);
-  db.Tasks.push(
-    new Task({ boardId: board.id }),
-    new Task({ boardId: board.id })
-  );
+  db.Boards.push(new Board());
+  db.Tasks.push(new Task());
 })();
-const getAllEntities = (tableName) => db[tableName].filter((entity) => entity);
 
-// const getEntity = (tableName, id) =>
-//   db[tableName].filter((entity) => {
-//     // console.log(entity.id)
-//     if (entity.id === id) {
-//       // console.log(entity)
-//       return entity;
-//     }
-//   });
+// all
 
-const getEntity = (tableName, id) => {
-  const entities = db[tableName]
-    .filter((entity) => entity)
-    .filter((entity) => entity.id === id);
-  return entities[0];
+const getAllEntities = (tableName) => db[tableName];
+
+// Users
+
+const getUserById = (id) => db.Users.filter((user) => user.id === id)[0];
+
+const saveUser = (user) => {
+  const newUser = new User(user);
+  db.Users.push(newUser);
+  return newUser;
 };
 
-const removeEntity = (tableName, id) => {
-  const entity = getEntity(tableName, id);
-  if (entity) {
-    db[`fix${tableName}Structure`](entity);
-    const index = db[tableName].indexOf(entity);
-    db[tableName] = [
-      ...db[tableName].slice(0, index),
-      ...(db[tableName].length > index + 1
-        ? db[tableName].slice(index + 1)
-        : []),
-    ];
+const updateUser = (id, userData) => {
+  if (!db.Users.some((user) => user.id === id)) {
+    return undefined;
   }
-  return entity
+  db.Users = db.Users.filter((user) => user.id !== id);
+  db.Users.push({ id, ...userData });
+  return { id, ...userData };
 };
 
-const saveEntity = (tableName, entity) => {
-  db[tableName].push(entity);
-  return getEntity(tableName, entity.id);
-};
-const updateEntity = (tableName, id, entity) => {
-  const oldEntity = getEntity(tableName, id);
-  console.log("id",id)
-  console.log("new",entity)
-  console.log("old",oldEntity)
-  if (oldEntity) {
-    db[tableName][db[tableName].indexOf(oldEntity)] = { id,...entity };
-    // console.log(entity)
+const removeUser = (id) => {
+  if (!db.Users.some((user) => user.id === id)) {
+    return false;
   }
-  return getEntity(tableName, id);
+  db.Users = db.Users.filter((user) => user.id !== id);
+
+  db.Tasks.forEach((task) => {
+    const currentTask = task;
+    if (currentTask.userId === id) {
+      currentTask.userId = null;
+    }
+  });
+  return true;
 };
 
-module.exports = { getAllEntities, getEntity, saveEntity, updateEntity,removeEntity };
+// Boards
+
+const getBoardById = (id) => db.Boards.filter((board) => board.id === id)[0];
+
+const saveBoard = (board) => {
+  const newBoard = new Board(board);
+  db.Boards.push(newBoard);
+  return newBoard;
+};
+
+const updateBoard = (id, boardData) => {
+  if (!db.Boards.some((board) => board.id === id)) {
+    return undefined;
+  }
+  db.Boards = db.Boards.filter((board) => board.id !== id);
+  db.Boards.push({ id, ...boardData });
+  return { id, ...boardData };
+};
+
+const removeBoard = (id) => {
+  if (!db.Boards.some((board) => board.id === id)) {
+    return false;
+  }
+  db.Boards = db.Boards.filter((board) => board.id !== id);
+  db.Tasks = db.Tasks.filter((task) => task.boardId !== id);
+  return true;
+};
+
+// Tasks
+
+const getTaskById = (id) => db.Tasks.filter((task) => task.id === id)[0];
+
+const saveTask = (task) => {
+  // console.log("task--->"+task);
+  const newTask = new Task(task);
+  db.Tasks.push(newTask);
+  return newTask;
+};
+
+const updateTask = (id, taskData) => {
+  if (!db.Tasks.some((task) => task.id === id)) {
+    return undefined;
+  }
+  db.Tasks = db.Tasks.filter((task) => task.id !== id);
+  db.Tasks.push({ id, ...taskData });
+  return { id, ...taskData };
+};
+
+const removeTask = (id) => {
+  if (!db.Tasks.some((task) => task.id === id)) {
+    return false;
+  }
+  db.Tasks = db.Tasks.filter((task) => task.id !== id);
+  return true;
+};
+
+
+module.exports = {
+  getAllEntities,
+
+  getUserById,
+  saveUser,
+  updateUser,
+  removeUser,
+
+  getBoardById,
+  saveBoard,
+  updateBoard,
+  removeBoard,
+
+  getTaskById,
+  saveTask,
+  updateTask,
+  removeTask,
+
+};
