@@ -9,7 +9,9 @@ const db = {
 };
 
 // init DB
-
+/**
+ * create DB
+ */
 (() => {
   for (let i = 0; i < 3; i += 1) {
     db.Users.push(new User());
@@ -81,14 +83,31 @@ const removeUser = (id) => {
 };
 
 // Boards
-
+/**
+ * return object of board with define id
+ * @param {String} id string id of board
+ * @returns {Object} object of board with define id
+ */
 const getBoardById = (id) => db.Boards.filter((board) => board.id === id)[0];
+
+/**
+ * create new board and save him to DB
+ * @param {Object} board object of new board 
+ * @returns {Object} return object of new board
+ */
 
 const saveBoard = (board) => {
   const newBoard = new Board(board);
   db.Boards.push(newBoard);
   return newBoard;
 };
+
+/**
+ * update object of existed board and return object of board with update data
+ * @param {String} id board id
+ * @param {*} boardData  object of board with new parametrs
+ * @returns {Object} return object of board with update data
+ */
 
 const updateBoard = (id, boardData) => {
   if (!db.Boards.some((board) => board.id === id)) {
@@ -98,6 +117,12 @@ const updateBoard = (id, boardData) => {
   db.Boards.push({ id, ...boardData });
   return { id, ...boardData };
 };
+
+/**
+ * delete the defined board and  all tasks of current board from DB 
+ * @param {String} id board id
+ * @returns {Boolen} returns true if board is in DB and false if it isn't
+ */
 
 const removeBoard = (id) => {
   if (!db.Boards.some((board) => board.id === id)) {
@@ -109,8 +134,18 @@ const removeBoard = (id) => {
 };
 
 // Tasks
-
+/**
+ * return object of task with define id
+ * @param {String} id string id of task
+ * @returns {Object} object of task with define id
+ */
 const getTaskById = (id) => db.Tasks.filter((task) => task.id === id)[0];
+
+/**
+ * create new task and save him to DB
+ * @param {Object} task object of new task 
+ * @returns {Object} return object of new task
+ */
 
 const saveTask = (task) => {
   // console.log("task--->"+task);
@@ -118,6 +153,13 @@ const saveTask = (task) => {
   db.Tasks.push(newTask);
   return newTask;
 };
+
+/**
+ * update object of existed task and return object of task with update data
+ * @param {String} id tasks id
+ * @param {*} taskData  object oftaskr with new parametrs
+ * @returns {Object} return object of task with update data
+ */
 
 const updateTask = (id, taskData) => {
   if (!db.Tasks.some((task) => task.id === id)) {
@@ -127,6 +169,12 @@ const updateTask = (id, taskData) => {
   db.Tasks.push({ id, ...taskData });
   return { id, ...taskData };
 };
+
+/**
+ * delete the defined task from DB
+ * @param {String} id task id
+ * @returns {Boolen} returns true if task is in DB and false if it isn't
+ */
 
 const removeTask = (id) => {
   if (!db.Tasks.some((task) => task.id === id)) {
