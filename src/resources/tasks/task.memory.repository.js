@@ -1,7 +1,11 @@
 const DB = require('../../utils/db');
 
 const TABLE_NAME = 'Tasks';
-
+/**
+ * 
+ * @param {string}
+ * @returns {ca}
+ */
 const getAll = async () => DB.getAllEntities(TABLE_NAME);
 
 const get = async (id) => DB.getTaskById(id);
