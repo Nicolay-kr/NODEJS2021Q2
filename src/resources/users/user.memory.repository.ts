@@ -12,9 +12,7 @@ interface IUser {
  * call the function getAllEntities(TABLE_NAME) from db.js which return object with all users
  * @returns {fuction} return call of function DB.getAllEntities(TABLE_NAME) which return object with all users
  */
-const getAll = async () => 
-  // console.log(typeof DB.getAllEntities(TABLE_NAME));
-   DB.getAllUsers()
+const getAll = async () =>  DB.getAllUsers()
 ;
 /**
  * call the function getUserById(id) from db.js which return object of define user

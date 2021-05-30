@@ -60,7 +60,7 @@ const db:IDb = {
  * Returns array of users
  * @returns {Object} object of users
  */
-const getAllUser = async () => User;
+const getAllUsers = async () => db.Users;
 
 // Users
 /**
@@ -123,7 +123,7 @@ const removeUser = (id:string) => {
  * Returns array of boards
  * @returns {Object} object of boards
  */
- const getAllBoards = async () => Board;
+ const getAllBoards = async () => db.Boards;
 /**
  * return object of board with define id
  * @param {String} id string id of board
@@ -181,7 +181,7 @@ const removeBoard = (id:string) => {
  * Returns array of tasks
  * @returns {Object} object of tasks
  */
- const getAllTasks = async () => Task;
+ const getAllTasks = async () => db.Tasks;
 /**
  * return object of task with define id
  * @param {String} id string id of task
@@ -234,7 +234,7 @@ const removeTask = (id:string) => {
 
 
 module.exports = {
-  getAllUser,
+  getAllUsers,
   getUserById,
   saveUser,
   updateUser,

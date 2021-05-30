@@ -5,8 +5,8 @@ interface ITask {
   title: string,
   order: number,
   description: string,
-  boardId: string,
-  columnId: string,
+  boardId: string|null,
+  columnId: string|null,
   userId: string|null,
 }
 
@@ -16,16 +16,16 @@ class Task implements ITask {
   order: number;
   description: string;
   userId: string|null;
-  boardId: string;
-  columnId: string;
+  boardId: string|null;
+  columnId: string|null;
   constructor({
+    boardId = null,
     id = uuidv4(),
     title = 'New task',
     order = 0,
     description = 'No description',
     userId = null,
-    boardId = '',
-    columnId = '',
+    columnId = null,
   } = {}) {
     this.id = id;
     this.title = title;
