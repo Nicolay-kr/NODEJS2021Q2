@@ -1,3 +1,4 @@
+export{}
 const DB = require('../../utils/db');
 
 const TABLE_NAME = 'Tasks';

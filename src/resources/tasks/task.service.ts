@@ -1,3 +1,4 @@
+export{}
 const tasksRepo = require('./task.memory.repository');
 /**
  * call the function getAll() from task.memory.repository.js

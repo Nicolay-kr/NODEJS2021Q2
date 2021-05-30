@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const boardsService = require('./board.service');
+import {Request, Response} from 'express';
 
-router.route('/').get(async (req, res) => {
+router.route('/').get(async (req:Request, res:Response) => {
   const boards = await boardsService.getAll();
   res.json(boards);
 });
 
-router.route('/:id').get(async (req, res) => {
+router.route('/:id').get(async (req:Request, res:Response) => {
   const board = await boardsService.get(req.params.id);
   if (board) {
     res.status(200).json(board);
@@ -15,8 +16,9 @@ router.route('/:id').get(async (req, res) => {
   }
 });
 
-router.route('/:id').delete(async (req, res) => {
-  const board = await boardsService.remove(req.params.id);
+router.route('/:id').delete(async (req:Request, res:Response) => {
+  const {id} = req.params;
+  const board = await boardsService.remove(id);
   if (board) {
     res.status(204).json(req.params.id);
   } else {
@@ -24,13 +26,14 @@ router.route('/:id').delete(async (req, res) => {
   }
 });
 
-router.route('/').post(async (req, res) => {
+router.route('/').post(async (req:Request, res:Response) => {
   const board = await boardsService.save(req.body);
   res.status(201).json(board);
 });
 
-router.route('/:id').put(async (req, res) => {
-  const board = await boardsService.update(req.params.id, req.body);
+router.route('/:id').put(async (req:Request, res:Response) => {
+  const {id} = req.params;
+  const board = await boardsService.update(id, req.body);
   if (board) {
     res.status(200).json(board);
   } else {

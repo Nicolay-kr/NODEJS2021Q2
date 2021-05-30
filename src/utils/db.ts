@@ -1,8 +1,35 @@
+export{}
 const User = require('../resources/users/user.model');
 const Board = require('../resources/boards/board.model');
 const Task = require('../resources/tasks/task.model');
 
-const db = {
+
+interface IUser {
+  id: string,
+  name: string,
+  login: string,
+  password: string
+}
+interface IBoard {
+  id: string,
+  name: string,
+  login: string,
+  password: string
+}
+interface ITask {
+  id: string,
+  name: string,
+  boardId: string,
+  userId: string
+}
+
+interface IDb {
+  Users: IUser[],
+  Boards: IBoard[],
+  Tasks: ITask[],
+}
+
+const db:IDb = {
   Users: [],
   Boards: [],
   Tasks: [],
@@ -39,14 +66,14 @@ const getAllEntities = (tableName) => {
  * @param {String} id string id of user
  * @returns {Object} object of user with define id
  */
-const getUserById = (id) => db.Users.filter((user) => user.id === id)[0];
+const getUserById = (id:string) => db.Users.filter((user) => user.id === id)[0];
 
 /**
  * create new user and save him to DB
  * @param {Object} user object of new user 
  * @returns {Object} return object of new user
  */
-const saveUser = (user) => {
+const saveUser = (user:IUser) => {
   console.log(typeof user)
   const newUser = new User(user);
   db.Users.push(newUser);
@@ -58,7 +85,7 @@ const saveUser = (user) => {
  * @param {Object} userData  object of user with new parametrs
  * @returns {Object} return object of user with update data
  */
-const updateUser = (id, userData) => {
+const updateUser = (id:string, userData:IUser) => {
   if (!db.Users.some((user) => user.id === id)) {
     return undefined;
   }
@@ -71,7 +98,7 @@ const updateUser = (id, userData) => {
  * @param {String} id user id
  * @returns {Boolen} returns true if user is in DB and false if it isn't
  */
-const removeUser = (id) => {
+const removeUser = (id:string) => {
   if (!db.Users.some((user) => user.id === id)) {
     return false;
   }
