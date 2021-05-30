@@ -11,9 +11,13 @@ interface IUser {
 
 class User implements IUser{
   id: string;
+
   login: string;
+
   name: string;
+
   password: string;
+
   constructor({
     id = uuidv4(),
     name = 'USER',

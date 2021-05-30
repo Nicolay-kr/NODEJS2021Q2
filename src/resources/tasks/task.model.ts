@@ -12,12 +12,19 @@ interface ITask {
 
 class Task implements ITask {
   id: string;
+
   title: string;
+
   order: number;
+
   description: string;
+
   userId: string|null;
+
   boardId: string|null;
+
   columnId: string|null;
+
   constructor({
     boardId = null,
     id = uuidv4(),
@@ -37,4 +44,4 @@ class Task implements ITask {
   }
 }
 
-module.exports = Task;
+export {Task};

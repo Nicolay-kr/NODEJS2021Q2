@@ -1,4 +1,5 @@
-const usersRepo = require('./user.memory.repository');
+import * as usersRepo from './user.memory.repository';
+
 export {}
 interface IUser {
     id: string,
@@ -38,4 +39,4 @@ const save = (user:IUser) => usersRepo.save(user);
  */
 const update = (id:string, user:IUser) => usersRepo.update(id, user);
 
-module.exports = { getAll, get, remove, save, update };
+export { getAll, get, remove, save, update };

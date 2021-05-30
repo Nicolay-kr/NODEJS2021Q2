@@ -1,6 +1,9 @@
-const router = require('express').Router({ mergeParams: true });
+import express, {Request, Response} from 'express';
+
 const tasksService = require('./task.service');
-import {Request, Response} from 'express';
+
+const router = express.Router({ mergeParams: true });
+
 
 router.route('/').get(async (req:Request, res:Response) => {
   console.log(req);
@@ -32,7 +35,7 @@ router.route('/').post(async (req:Request, res:Response) => {
   const {boardId} = req.params;
   const task = await tasksService.save({
     ...req.body,
-    boardId: boardId,
+    boardId,
   });
   res.status(201).json(task);
 });
@@ -47,4 +50,4 @@ router.route('/:id').put(async (req:Request, res:Response) => {
   }
 });
 
-module.exports = router;
+export {router};

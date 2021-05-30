@@ -1,5 +1,6 @@
+import * as boardRepo from './board.memory.repository';
+
 export{}
-const boardRepo = require('./board.memory.repository');
 
 interface IColumn {
     id: string,
@@ -43,4 +44,4 @@ const save = (board:IBoard) => boardRepo.save(board);
  */
 const update = (id:string, board:IBoard) => boardRepo.update(id, board);
 
-module.exports = { getAll, get, remove, save, update };
+export{ getAll, get, remove, save, update };

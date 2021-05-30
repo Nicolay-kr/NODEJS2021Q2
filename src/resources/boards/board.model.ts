@@ -15,7 +15,9 @@ interface IBoard {
 
 class Column implements IColumn {
   id: string;
+
   order: number;
+
   title: string;
 
   constructor({ id = uuidv4(), title = '', order = 0 }) {
@@ -28,8 +30,11 @@ class Column implements IColumn {
 
 class Board implements IBoard{
   id: string;
+
   title: string;
+
   columns: Array<IColumn>;
+
   constructor({
     id = uuidv4(),
     title = 'string',
@@ -44,4 +49,4 @@ class Board implements IBoard{
   }
 }
 
-module.exports = Board;
+export {Board};
