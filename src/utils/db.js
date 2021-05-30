@@ -25,9 +25,13 @@ const db = {
 /**
  * Returns array  of all elements one DB field
  * @param {String} tableName  name of DB field
- * @returns {Array} array of elements the define DB field
+ * @returns {Object} object of elements the define DB field
  */
-const getAllEntities = (tableName) => db[tableName];
+const getAllEntities = (tableName) => {
+  console.log(typeof db[tableName])
+  return db[tableName];
+
+}
 
 // Users
 /**
@@ -51,7 +55,7 @@ const saveUser = (user) => {
 /**
  * update object of existed user and return object of user with update data
  * @param {String} id user id
- * @param {*} userData  object of user with new parametrs
+ * @param {Object} userData  object of user with new parametrs
  * @returns {Object} return object of user with update data
  */
 const updateUser = (id, userData) => {
@@ -105,7 +109,7 @@ const saveBoard = (board) => {
 /**
  * update object of existed board and return object of board with update data
  * @param {String} id board id
- * @param {*} boardData  object of board with new parametrs
+ * @param {Object} boardData  object of board with new parametrs
  * @returns {Object} return object of board with update data
  */
 
@@ -157,7 +161,7 @@ const saveTask = (task) => {
 /**
  * update object of existed task and return object of task with update data
  * @param {String} id tasks id
- * @param {*} taskData  object oftaskr with new parametrs
+ * @param {Object} taskData  object of task with new parametrs
  * @returns {Object} return object of task with update data
  */
 
