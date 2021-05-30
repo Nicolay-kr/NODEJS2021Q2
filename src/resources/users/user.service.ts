@@ -1,4 +1,11 @@
 const usersRepo = require('./user.memory.repository');
+export {}
+interface IUser {
+    id: string,
+    name: string,
+    login: string,
+    password: string
+  }
 
 /**
  * call the function getAll() from user.memory.repository.js
@@ -10,25 +17,25 @@ const getAll = () => usersRepo.getAll();
  * @param {String} id user id
  * @returns {fuction} return call of function get(id) from user.memory.repository.js
  */
-const get = (id) => usersRepo.get(id);
+const get = (id:string) => usersRepo.get(id);
 /**
  * call the function remove(user) from user.memory.repository.js
  * @param {String} id user id
  * @returns {fuction} return call of function remove(user) from user.memory.repository.js 
  */
-const remove = (user) => usersRepo.remove(user);
+const remove = (id:string) => usersRepo.remove(id);
 /**
  * call the function save(user) from user.memory.repository.js
  * @param {String} id user id
  * @returns {fuction} return call of function save(user) from user.memory.repository.js 
  */
-const save = (user) => usersRepo.save(user);
+const save = (user:IUser) => usersRepo.save(user);
 /**
  * call the function update(id,user) from user.memory.repository.js
  * @param {String} id id of user
  * @param {Object} user object of user with updated data
  * @returns return call of function update(id,user) from user.memory.repository.js
  */
-const update = (id, user) => usersRepo.update(id, user);
+const update = (id:string, user:IUser) => usersRepo.update(id, user);
 
 module.exports = { getAll, get, remove, save, update };
