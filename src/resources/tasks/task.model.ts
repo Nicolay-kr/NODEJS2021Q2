@@ -1,14 +1,31 @@
 import { v4 as uuidv4 } from 'uuid';
 
-class Task {
+interface ITask {
+  id?: string,
+  title: string,
+  order: number,
+  description: string,
+  boardId: string,
+  columnId: string,
+  userId: string|null,
+}
+
+class Task implements ITask {
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string|null;
+  boardId: string;
+  columnId: string;
   constructor({
-    boardId = null,
     id = uuidv4(),
     title = 'New task',
     order = 0,
     description = 'No description',
     userId = null,
-    columnId = null,
+    boardId = '',
+    columnId = '',
   } = {}) {
     this.id = id;
     this.title = title;

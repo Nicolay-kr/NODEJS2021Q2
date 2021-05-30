@@ -3,12 +3,14 @@ const boardsService = require('./board.service');
 import {Request, Response} from 'express';
 
 router.route('/').get(async (req:Request, res:Response) => {
+  console.log(req);
   const boards = await boardsService.getAll();
   res.json(boards);
 });
 
 router.route('/:id').get(async (req:Request, res:Response) => {
-  const board = await boardsService.get(req.params.id);
+  const {id} = req.params;
+  const board = await boardsService.get(id);
   if (board) {
     res.status(200).json(board);
   } else {
@@ -20,7 +22,7 @@ router.route('/:id').delete(async (req:Request, res:Response) => {
   const {id} = req.params;
   const board = await boardsService.remove(id);
   if (board) {
-    res.status(204).json(req.params.id);
+    res.status(204).json(id);
   } else {
     res.status(201).send('Bad request');
   }

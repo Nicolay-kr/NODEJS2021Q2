@@ -1,7 +1,5 @@
 const DB = require('../../utils/db');
 // const NOT_FOUND_ERROR = require("")
-const TABLE_NAME = 'Users';
-
 interface IUser {
   id: string,
   name: string,
@@ -16,7 +14,7 @@ interface IUser {
  */
 const getAll = async () => 
   // console.log(typeof DB.getAllEntities(TABLE_NAME));
-   DB.getAllEntities(TABLE_NAME)
+   DB.getAllUsers()
 ;
 /**
  * call the function getUserById(id) from db.js which return object of define user

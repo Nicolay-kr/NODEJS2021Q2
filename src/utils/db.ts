@@ -10,17 +10,24 @@ interface IUser {
   login: string,
   password: string
 }
+interface IColumn {
+  id: string,
+  title: string,
+  order: number
+}
 interface IBoard {
   id: string,
-  name: string,
-  login: string,
-  password: string
+  title: string,
+  columns: Array<IColumn>
 }
 interface ITask {
-  id: string,
-  name: string,
+  id?: string,
+  title: string,
+  order: number,
+  description: string,
   boardId: string,
-  userId: string
+  columnId: string,
+  userId: string|null,
 }
 
 interface IDb {
@@ -50,15 +57,10 @@ const db:IDb = {
 // all
 
 /**
- * Returns array  of all elements one DB field
- * @param {String} tableName  name of DB field
- * @returns {Object} object of elements the define DB field
+ * Returns array of users
+ * @returns {Object} object of users
  */
-const getAllEntities = (tableName) => {
-  console.log(typeof db[tableName])
-  return db[tableName];
-
-}
+const getAllUser = async () => User;
 
 // Users
 /**
@@ -90,8 +92,10 @@ const updateUser = (id:string, userData:IUser) => {
     return undefined;
   }
   db.Users = db.Users.filter((user) => user.id !== id);
-  db.Users.push({ id, ...userData });
-  return { id, ...userData };
+  const muUser:IUser = {...userData} 
+  muUser.id= id
+  db.Users.push(muUser);
+  return muUser;
 };
 /**
  * delete the defined user from DB and change the user.id field of elements of field Task of DB
@@ -114,12 +118,18 @@ const removeUser = (id:string) => {
 };
 
 // Boards
+
+/**
+ * Returns array of boards
+ * @returns {Object} object of boards
+ */
+ const getAllBoards = async () => Board;
 /**
  * return object of board with define id
  * @param {String} id string id of board
  * @returns {Object} object of board with define id
  */
-const getBoardById = (id) => db.Boards.filter((board) => board.id === id)[0];
+const getBoardById = (id:string) => db.Boards.filter((board) => board.id === id)[0];
 
 /**
  * create new board and save him to DB
@@ -127,7 +137,7 @@ const getBoardById = (id) => db.Boards.filter((board) => board.id === id)[0];
  * @returns {Object} return object of new board
  */
 
-const saveBoard = (board) => {
+const saveBoard = (board:IBoard) => {
   const newBoard = new Board(board);
   db.Boards.push(newBoard);
   return newBoard;
@@ -140,13 +150,15 @@ const saveBoard = (board) => {
  * @returns {Object} return object of board with update data
  */
 
-const updateBoard = (id, boardData) => {
+const updateBoard = (id:string, boardData:IBoard) => {
   if (!db.Boards.some((board) => board.id === id)) {
     return undefined;
   }
   db.Boards = db.Boards.filter((board) => board.id !== id);
-  db.Boards.push({ id, ...boardData });
-  return { id, ...boardData };
+  const myBoard:IBoard = {...boardData} 
+  myBoard.id = id
+  db.Boards.push(myBoard);
+  return myBoard;
 };
 
 /**
@@ -155,7 +167,7 @@ const updateBoard = (id, boardData) => {
  * @returns {Boolen} returns true if board is in DB and false if it isn't
  */
 
-const removeBoard = (id) => {
+const removeBoard = (id:string) => {
   if (!db.Boards.some((board) => board.id === id)) {
     return false;
   }
@@ -166,11 +178,16 @@ const removeBoard = (id) => {
 
 // Tasks
 /**
+ * Returns array of tasks
+ * @returns {Object} object of tasks
+ */
+ const getAllTasks = async () => Task;
+/**
  * return object of task with define id
  * @param {String} id string id of task
  * @returns {Object} object of task with define id
  */
-const getTaskById = (id) => db.Tasks.filter((task) => task.id === id)[0];
+const getTaskById = (id:string) => db.Tasks.filter((task) => task.id === id)[0];
 
 /**
  * create new task and save him to DB
@@ -178,7 +195,7 @@ const getTaskById = (id) => db.Tasks.filter((task) => task.id === id)[0];
  * @returns {Object} return object of new task
  */
 
-const saveTask = (task) => {
+const saveTask = (task:ITask) => {
   // console.log("task--->"+task);
   const newTask = new Task(task);
   db.Tasks.push(newTask);
@@ -192,7 +209,7 @@ const saveTask = (task) => {
  * @returns {Object} return object of task with update data
  */
 
-const updateTask = (id, taskData) => {
+const updateTask = (id:string, taskData:ITask) => {
   if (!db.Tasks.some((task) => task.id === id)) {
     return undefined;
   }
@@ -207,7 +224,7 @@ const updateTask = (id, taskData) => {
  * @returns {Boolen} returns true if task is in DB and false if it isn't
  */
 
-const removeTask = (id) => {
+const removeTask = (id:string) => {
   if (!db.Tasks.some((task) => task.id === id)) {
     return false;
   }
@@ -217,18 +234,19 @@ const removeTask = (id) => {
 
 
 module.exports = {
-  getAllEntities,
-
+  getAllUser,
   getUserById,
   saveUser,
   updateUser,
   removeUser,
 
+  getAllBoards,
   getBoardById,
   saveBoard,
   updateBoard,
   removeBoard,
 
+  getAllTasks,
   getTaskById,
   saveTask,
   updateTask,

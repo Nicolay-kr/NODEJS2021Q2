@@ -11,12 +11,11 @@ interface IColumn {
     columns: Array<IColumn>
   }
 
-const TABLE_NAME = 'Boards';
 /**
  * call the function getAllEntities(TABLE_NAME) from db.js which return object with all boards
  * @returns {fuction} return call of function DB.getAllEntities(TABLE_NAME) which return object with all boards
  */
-const getAll = async () => DB.getAllEntities(TABLE_NAME);
+const getAll = async () => DB.getAllBoards();
 /**
  * call the function getboardById(id) from db.js which return object of define board
  * @param {String} id board id
