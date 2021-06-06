@@ -28,6 +28,8 @@
     "prettier",
     "plugin:@typescript-eslint/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "import/extensions": "off",
     "linebreak-style": "off",
