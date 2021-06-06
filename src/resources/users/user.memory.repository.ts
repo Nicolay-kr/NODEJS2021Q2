@@ -1,4 +1,4 @@
-const DB = require('../../utils/db');
+import * as DB from'../../utils/db';
 // const NOT_FOUND_ERROR = require("")
 interface IUser {
   id: string,
@@ -36,7 +36,7 @@ const remove = async (id:string) => DB.removeUser(id);
  * @param {Object} user object new user
  * @returns {fuction} return call of function DB.saveUser(user) which save new user 
  */
-const save = async (user:string) => DB.saveUser(user);
+const save = async (user:IUser) => DB.saveUser(user);
 /**
  * call the function updateUser(id, user) from db.js which update object of one define user in DB
  * @param {String} id id of user
@@ -45,4 +45,4 @@ const save = async (user:string) => DB.saveUser(user);
  */
 const update = async (id:string, user: IUser) => DB.updateUser(id, user);
 
-module.exports = { getAll, get, remove, save, update };
+export { getAll, get, remove, save, update };

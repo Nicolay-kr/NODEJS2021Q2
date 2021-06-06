@@ -1,5 +1,6 @@
 export{}
-const DB = require('../../utils/db');
+import * as DB from'../../utils/db';
+
 interface IColumn {
     id: string,
     title: string,
@@ -43,4 +44,4 @@ const save = async (board:IBoard) => DB.saveBoard(board);
  */
 const update = async (id:string, board:IBoard) => DB.updateBoard(id, board);
 
-module.exports = { getAll, get, remove, save, update };
+export{ getAll, get, remove, save, update };

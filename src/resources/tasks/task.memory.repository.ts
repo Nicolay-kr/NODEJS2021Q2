@@ -1,5 +1,6 @@
+import * as DB from'../../utils/db';
+
 export{}
-const DB = require('../../utils/db');
 
 interface ITask {
     id?: string,
@@ -41,5 +42,5 @@ const save = async (task:ITask) => DB.saveTask(task);
  */
 const update = async (id:string, task:ITask) => DB.updateTask(id, task);
 
-module.exports = { getAll, get, remove, save, update };
+export{ getAll, get, remove, save, update };
 

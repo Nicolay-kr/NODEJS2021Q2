@@ -1,5 +1,6 @@
+import * as tasksRepo from './task.memory.repository';
+
 export{}
-const tasksRepo = require('./task.memory.repository');
 
 interface ITask {
     id?: string,
@@ -40,4 +41,4 @@ const save = (task:ITask) => tasksRepo.save(task);
  */
 const update = (id:string, task:ITask) => tasksRepo.update(id, task);
 
-module.exports = { getAll, get, remove, save, update };
+export{ getAll, get, remove, save, update };

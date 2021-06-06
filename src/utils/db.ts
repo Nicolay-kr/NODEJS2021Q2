@@ -233,7 +233,7 @@ const removeTask = (id:string) => {
 };
 
 
-module.exports = {
+export {
   getAllUsers,
   getUserById,
   saveUser,

@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+
 const router = require('express').Router();
 const User = require('./user.model');
 const userService = require('./user.service');
@@ -45,4 +46,4 @@ router.route('/:id').put(async (req: Request, res: Response) => {
   }
 });
 
-module.exports = router;
+export {router};

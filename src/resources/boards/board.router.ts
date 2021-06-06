@@ -1,6 +1,7 @@
+import {Request, Response} from 'express';
+
 const router = require('express').Router();
 const boardsService = require('./board.service');
-import {Request, Response} from 'express';
 
 router.route('/').get(async (req:Request, res:Response) => {
   console.log(req);
@@ -43,4 +44,4 @@ router.route('/:id').put(async (req:Request, res:Response) => {
   }
 });
 
-module.exports = router;
+export {router};
