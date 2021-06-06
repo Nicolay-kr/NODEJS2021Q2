@@ -28,4 +28,4 @@ app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 boardRouter.use('/:boardId/tasks', taskRouter);
 
-module.exports = app;
+export default app;

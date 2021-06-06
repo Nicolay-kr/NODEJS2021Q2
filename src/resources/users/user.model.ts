@@ -9,7 +9,7 @@ interface IUser {
   password: string
 }
 
-class User implements IUser{
+export default class User implements IUser{
   id: string;
 
   login: string;
@@ -40,5 +40,3 @@ class User implements IUser{
   }
 
 }
-
-module.exports = User;

@@ -1,8 +1,7 @@
-import express, {Request, Response} from 'express';
+import {Router,Request, Response} from 'express';
+import * as tasksService from './task.service';
 
-const tasksService = require('./task.service');
-
-const router = express.Router({ mergeParams: true });
+const router = Router();
 
 
 router.route('/').get(async (req:Request, res:Response) => {

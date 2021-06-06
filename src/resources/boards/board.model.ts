@@ -28,7 +28,7 @@ class Column implements IColumn {
 
 }
 
-class Board implements IBoard{
+export default class Board implements IBoard{
   id: string;
 
   title: string;

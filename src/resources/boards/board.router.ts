@@ -1,7 +1,7 @@
-import {Request, Response} from 'express';
+import {Router,Request, Response} from 'express';
+import * as boardsService from './board.service';
 
-const router = require('express').Router();
-const boardsService = require('./board.service');
+const router = Router();
 
 router.route('/').get(async (req:Request, res:Response) => {
   console.log(req);

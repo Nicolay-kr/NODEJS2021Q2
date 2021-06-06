@@ -10,7 +10,7 @@ interface ITask {
   userId: string|null,
 }
 
-class Task implements ITask {
+export default class Task implements ITask {
   id: string;
 
   title: string;

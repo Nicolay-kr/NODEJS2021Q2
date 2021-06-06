@@ -1,7 +1,7 @@
 export{}
-const User = require('../resources/users/user.model');
-const Board = require('../resources/boards/board.model');
-const Task = require('../resources/tasks/task.model');
+import User from '../resources/users/user.model';
+import Board from '../resources/boards/board.model';
+import Task from '../resources/tasks/task.model';
 
 
 interface IUser {
@@ -46,13 +46,13 @@ const db:IDb = {
 /**
  * create DB
  */
-(() => {
-  for (let i = 0; i < 3; i += 1) {
-    db.Users.push(new User());
-  }
-  db.Boards.push(new Board());
-  db.Tasks.push(new Task());
-})();
+// (() => {
+//   for (let i = 0; i < 3; i += 1) {
+//     db.Users.push(new User());
+//   }
+//   db.Boards.push(new Board());
+//   db.Tasks.push(new Task());
+// })();
 
 // all
 
