@@ -111,7 +111,7 @@ const removeUser = (id:string) => {
   db.Tasks.forEach((task) => {
     const currentTask = task;
     if (currentTask.userId === id) {
-      currentTask.userId = null;
+      currentTask.userId = '';
     }
   });
   return true;
