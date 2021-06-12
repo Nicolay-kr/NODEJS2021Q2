@@ -31,10 +31,11 @@ router.route('/:id').delete(async (req:Request, res:Response) => {
 });
 
 router.route('/').post(async (req:Request, res:Response) => {
-  const {boardId} = req.params;
+  // const {boardId} = req.params;
+  const reqBoardId = req.params['boardId'] as string|null;
   const task = await tasksService.save({
     ...req.body,
-    boardId,
+    boardId: reqBoardId,
   });
   res.status(201).json(task);
 });

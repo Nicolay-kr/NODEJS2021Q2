@@ -1,40 +1,34 @@
 import { v4 as uuidv4 } from 'uuid';
 
 interface ITask {
-  id?: string,
-  title: string,
-  order: number,
-  description: string,
-  boardId: string|undefined,
-  columnId: string|undefined,
-  userId: string|undefined,
+  id?: string;
+  title: string;
+  order: number;
+  description: string;
+  boardId: string | null;
+  columnId: string | null;
+  userId: string | null;
 }
 
-export default class Task implements ITask {
+export default class Task{
   id: string;
-
   title: string;
-
   order: number;
-
   description: string;
-
-  userId: string;
-
-  boardId: string;
-
-  columnId: string;
+  boardId: string | null;
+  columnId: string | null;
+  userId: string | null;
 
   
   constructor({
-    boardId = null||'',
     id = uuidv4(),
     title = 'New task',
     order = 0,
     description = 'No description',
-    userId = '',
-    columnId = '',
-  } = {}) {
+    boardId = null,
+    userId = null,
+    columnId = null,
+  } = {} as ITask) {
     this.id = id;
     this.title = title;
     this.order = order;
