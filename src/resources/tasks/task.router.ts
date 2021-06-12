@@ -12,7 +12,7 @@ router.route('/').get(async (req:Request, res:Response) => {
 
 router.route('/:id').get(async (req:Request, res:Response) => {
   const {id} = req.params;
-  const task = await tasksService.get(id);
+  const task = await tasksService.get(String(id));
   if (task) {
     res.status(200).json(task);
   } else {
@@ -22,7 +22,7 @@ router.route('/:id').get(async (req:Request, res:Response) => {
 
 router.route('/:id').delete(async (req:Request, res:Response) => {
   const {id} = req.params;
-  const task = await tasksService.remove(id);
+  const task = await tasksService.remove(String(id));
   if (task) {
     res.status(204).send('The task has been deleted');
   } else {
@@ -41,7 +41,7 @@ router.route('/').post(async (req:Request, res:Response) => {
 
 router.route('/:id').put(async (req:Request, res:Response) => {
   const {id} = req.params;
-  const task = await tasksService.update(id, req.body);
+  const task = await tasksService.update(String(id), req.body);
   if (task) {
     res.status(200).json(task);
   } else {

@@ -11,7 +11,7 @@ router.route('/').get(async (req:Request, res:Response) => {
 
 router.route('/:id').get(async (req:Request, res:Response) => {
   const {id} = req.params;
-  const board = await boardsService.get(id);
+  const board = await boardsService.get(String(id));
   if (board) {
     res.status(200).json(board);
   } else {
@@ -21,7 +21,7 @@ router.route('/:id').get(async (req:Request, res:Response) => {
 
 router.route('/:id').delete(async (req:Request, res:Response) => {
   const {id} = req.params;
-  const board = await boardsService.remove(id);
+  const board = await boardsService.remove(String(id));
   if (board) {
     res.status(204).json(id);
   } else {
@@ -36,7 +36,7 @@ router.route('/').post(async (req:Request, res:Response) => {
 
 router.route('/:id').put(async (req:Request, res:Response) => {
   const {id} = req.params;
-  const board = await boardsService.update(id, req.body);
+  const board = await boardsService.update(String(id), req.body);
   if (board) {
     res.status(200).json(board);
   } else {

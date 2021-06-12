@@ -5,9 +5,9 @@ interface ITask {
   title: string,
   order: number,
   description: string,
-  boardId: string|null,
-  columnId: string|null,
-  userId: string|null,
+  boardId: string|undefined,
+  columnId: string|undefined,
+  userId: string|undefined,
 }
 
 export default class Task implements ITask {
@@ -19,20 +19,21 @@ export default class Task implements ITask {
 
   description: string;
 
-  userId: string|null;
+  userId: string;
 
-  boardId: string|null;
+  boardId: string;
 
-  columnId: string|null;
+  columnId: string;
 
+  
   constructor({
-    boardId = null,
+    boardId = null||'',
     id = uuidv4(),
     title = 'New task',
     order = 0,
     description = 'No description',
-    userId = null,
-    columnId = null,
+    userId = '',
+    columnId = '',
   } = {}) {
     this.id = id;
     this.title = title;
@@ -44,4 +45,4 @@ export default class Task implements ITask {
   }
 }
 
-export {Task};
+export {Task,ITask};

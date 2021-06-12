@@ -15,7 +15,7 @@ router.route('/').get(async (req: Request, res: Response) => {
 
 router.route('/:id').get(async (req: Request, res: Response) => {
   const {id} = req.params;
-  const user = await userService.get(id);
+  const user = await userService.get(String(id));
   if (user) {
     res.status(200).json(User.toResponse(user));
   } else {
@@ -25,7 +25,7 @@ router.route('/:id').get(async (req: Request, res: Response) => {
 
 router.route('/:id').delete(async (req: Request, res: Response) => {
   const {id} = req.params;
-  const user = await userService.remove(id);
+  const user = await userService.remove(String(id));
   if (user) {
     res.status(204).send('The user has been deleted');
   } else {
@@ -40,7 +40,7 @@ router.route('/').post(async (req: Request, res: Response) => {
 
 router.route('/:id').put(async (req: Request, res: Response) => {
   const {id} = req.params;
-  const user = await userService.update(id, req.body);
+  const user = await userService.update(String(id), req.body);
   if (user) {
     res.status(200).json(User.toResponse(user));
   } else {
