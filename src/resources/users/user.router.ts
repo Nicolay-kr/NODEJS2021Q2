@@ -1,5 +1,5 @@
 
-import {User} from './user.model';
+import User from './user.model';
 import {Router,Request, Response} from 'express';
 import * as userService from './user.service';
 
