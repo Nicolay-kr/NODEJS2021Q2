@@ -10,7 +10,7 @@ const logger = createLogger({
       format: format.cli(),
     }),
     new transports.File({
-      filename: './src/logging/logs/errors.log',
+      filename: './src/logs/errors.log',
       handleExceptions: false,
       level: 'error',
       format: format.combine(

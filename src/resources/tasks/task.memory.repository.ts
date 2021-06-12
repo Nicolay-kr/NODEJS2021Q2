@@ -1,16 +1,8 @@
 import * as DB from'../../utils/db';
+import {ITask} from './task.model'
 
 export{}
 
-interface ITask {
-    id?: string,
-    title: string,
-    order: number,
-    description: string,
-    boardId: string,
-    columnId: string,
-    userId: string|null,
-  }
 /**
  * call the function getAllEntities(TABLE_NAME) from db.js which return object with all tasks
  * @returns {fuction} return call of function DB.getAllEntities(TABLE_NAME) which return object with all tasks

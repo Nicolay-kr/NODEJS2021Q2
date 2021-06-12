@@ -2,7 +2,7 @@ export{}
 import User from '../resources/users/user.model';
 import Board from '../resources/boards/board.model';
 import Task from '../resources/tasks/task.model';
-
+import {ITask} from '../resources/tasks/task.model'
 
 interface IUser {
   id: string,
@@ -20,15 +20,15 @@ interface IBoard {
   title: string,
   columns: Array<IColumn>
 }
-interface ITask {
-  id?: string,
-  title: string,
-  order: number,
-  description: string,
-  boardId: string,
-  columnId: string,
-  userId: string|null,
-}
+// interface ITask {
+//   id?: string,
+//   title: string,
+//   order: number,
+//   description: string,
+//   boardId: string|null,
+//   columnId: string|null|undefined,
+//   userId: string|null,
+// }
 
 interface IDb {
   Users: IUser[],
@@ -111,7 +111,7 @@ const removeUser = (id:string) => {
   db.Tasks.forEach((task) => {
     const currentTask = task;
     if (currentTask.userId === id) {
-      currentTask.userId = null;
+      currentTask.userId = '';
     }
   });
   return true;

@@ -1,16 +1,8 @@
 import * as tasksRepo from './task.memory.repository';
+import {ITask} from './task.model'
 
 export{}
 
-interface ITask {
-    id?: string,
-    title: string,
-    order: number,
-    description: string,
-    boardId: string,
-    columnId: string,
-    userId: string|null,
-  }
 /**
  * call the function getAll() from task.memory.repository.js
  * @returns {fuction} return call of function getAll() 
@@ -23,6 +15,7 @@ const getAll = () => tasksRepo.getAll();
  */
 const get = (id:string) => tasksRepo.get(id);
 /**
+ * 
  * call the function remove(task) from task.memory.repository.js
  * @param {String} id task id
  * @returns {fuction} return call of function remove(task) from task.memory.repository.js 
