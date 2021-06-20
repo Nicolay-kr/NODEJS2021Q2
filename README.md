@@ -70,3 +70,4 @@ npm run lint
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+init Task 7. PostgreSQL & Typeorm
